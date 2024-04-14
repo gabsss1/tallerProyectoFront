@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
+import { ToastrService } from 'ngx-toastr';
 import { HttpService } from 'src/app/services/service';
 
 @Component({
@@ -20,7 +21,8 @@ export class IndexComponent implements OnInit{
     textoBusqueda = '';
 
   constructor(
-    private _httpService: HttpService
+    private _httpService: HttpService,
+    private _toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -41,4 +43,23 @@ export class IndexComponent implements OnInit{
 
     this.getAll();
   }
+
+  delete(mecanicoId: number){
+    console.log('Eliminar mecánico con ID:', mecanicoId); // Agregar console.log aquí
+
+    
+    let confirmacion = confirm('¿Deseas eliminarlo?')
+
+    if(confirmacion){
+      let ids = [mecanicoId]
+
+      this._httpService.delete(ids)
+      .subscribe((respuesta: any) => {
+        this._toastr.success('Mecanico Eliminado', 'Confirmacion')
+        this.getAll();
+      });
+    };
+  }
+
+
 }

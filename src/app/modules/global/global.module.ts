@@ -11,11 +11,13 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
 
 
 
@@ -37,6 +39,12 @@ import { FormsModule } from '@angular/forms';
     MatTableModule,
     MatPaginatorModule,
     FormsModule,
+    MatTooltipModule,
+    ToastrModule.forRoot({
+      closeButton: true,
+      progressBar: true,
+      enableHtml: true
+    })
   ],
   exports: [
     MatToolbarModule,
@@ -48,7 +56,9 @@ import { FormsModule } from '@angular/forms';
     MatInputModule,
     MatTableModule,
     MatPaginatorModule,
-    FormsModule
+    FormsModule,
+    MatTooltipModule,
+    ToastrModule
   ]
 })
 export class GlobalModule { }
