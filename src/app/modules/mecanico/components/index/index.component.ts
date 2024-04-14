@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { ToastrService } from 'ngx-toastr';
 import { HttpService } from 'src/app/services/service';
+import { FormComponent } from '../form/form.component';
 
 @Component({
   selector: 'app-index',
@@ -22,7 +24,8 @@ export class IndexComponent implements OnInit{
 
   constructor(
     private _httpService: HttpService,
-    private _toastr: ToastrService
+    private _toastr: ToastrService,
+    private _dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -61,5 +64,26 @@ export class IndexComponent implements OnInit{
     };
   }
 
+  crearMecanico(){
+    const dialogRef = this._dialog.open(FormComponent, {
+      disableClose: true,
+      autoFocus: true,
+      closeOnNavigation: false,
+      position: { top: '30px'},
+      width: '700px',
+      data: {
+
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === true) {
+        // Si el resultado es verdadero, muestra un mensaje de éxito
+        this._toastr.success('Registro Exitoso', 'Confirmacion');
+        // Luego, recarga los datos
+        this.getAll();
+      }
+    });
+  }
 
 }

@@ -29,4 +29,8 @@ export class HttpService {
         }
         return this._httpClient.delete('http://localhost:57477/api/mecanico', option)
     }
+
+    post(data: any) {
+        return this._httpClient.post('http://localhost:57477/api/mecanico', data);
+    }
 }
